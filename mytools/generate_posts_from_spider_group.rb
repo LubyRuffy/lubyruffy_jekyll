@@ -27,7 +27,9 @@ def write_file(filename, content)
 end
 
 Content.order(created_at: :desc).all.each{|c|
-	filename = File.expand_path(File.join(File.dirname(__FILE__), "../_posts/#{c.created_at.strftime('%Y-%m-%d').to_s  }-#{c.id}.text"))
+  #按照url做唯一判断
+  url_hash = Digest::MD5.hexdigest(c.url)
+	filename = File.expand_path(File.join(File.dirname(__FILE__), "../_posts/#{c.created_at.strftime('%Y-%m-%d').to_s  }-#{url_hash}.text"))
 	post  = <<DOCUMENT
 ---
 layout: post
