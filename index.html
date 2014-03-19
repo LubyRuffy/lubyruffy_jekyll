@@ -4,12 +4,12 @@ title: LubyRuffy的天上人间
 ---
 
 <div id="home">
-	{% for post in site.posts %}
+	{% for post in paginator.posts %}
 	  <div class="feeds-item">
 		<h3><a href="{{ post.url }}" target="_blank" class="feeds-item-more">{{ post.title }}</a></h3>
 		<div class="feeds-item-detail clearfix ">
             {% if post.cover %}
-			<p class="feeds-item-pic"><a href="{{ post.url }}" target="_blank" class="feeds-item-more"><img src="{{ post.cover }}"></a></p>
+			<p class="feeds-item-pic"><a href="{{ post.url }}" target="_blank" class="feeds-item-more"><img src="/{{ post.cover }}"></a></p>
             {% endif %}
             <p class="feeds-item-text">{{ post.description }}<a href="{{ post.url }}" target="_blank" class="feeds-item-more">[详细]</a></p>
         	<p class="feeds-item-info">
@@ -22,4 +22,33 @@ title: LubyRuffy的天上人间
     	</div>
 	  </div>
 	{% endfor %}
+
+    <!-- 分页链接 -->
+    <div class="pull-right pages">
+      {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path }}"><</a>
+      {% else %}
+          <!--<b><</b>-->
+      {% endif %}
+
+          {% if paginator.page == 1 %}
+            <b class="current-page">1</b>
+          {% else %}
+            <a href="/">1</a>
+          {% endif %}
+
+        {% for count in (2..paginator.total_pages) %}
+            {% if count == paginator.page %}
+              <b class="current-page">{{ count }}</b>
+            {% else %}
+              <a href="/page{{ count }}">{{ count }}</a>
+            {% endif %}
+        {% endfor %}
+
+      {% if paginator.next_page %}
+          <a href="{{ paginator.next_page_path }}">></a>
+      {% endif %}
+
+    </div>
 </div>
+

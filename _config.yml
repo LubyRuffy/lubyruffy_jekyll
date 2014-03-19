@@ -6,7 +6,14 @@ pygments: true
 destination: public
 
 safe: false
-gems: [jekyll-assets, jekyll-categories]
+gems: [jekyll-assets] #, jekyll-categories]
 
 #对应categories插件的配置
 category_title_prefix: 分类
+
+#分页
+paginate: 10
+paginate_path: "/page:num"
+#分类的分页要用到
+pagination: true
+category: freebuf
